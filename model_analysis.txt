@@ -1,0 +1,30 @@
+The solution I have shared uses a simple architecture/model to classify images as either sushi or sandwich. The solution can be improved with more layers and tuning to improve its performance. The primary focus here is speed of execution and ease of deployment.
+Data preparation
+I created two directories named train and test.
+The train directory contains 2 separate folders, one for sushi images and the other for sandwich images.
+I did the same for the test directory.
+Both directories are housed in a directory called Data_cp
+Data pre-processing
+I then generated batches of image data with real-time data augmentation.
+ImageDataGenerator(width_shift_range=0.2, height_shift_range=0.2, shear_range=0.2, zoom_range=0.2, horizontal_flip=False, fill_mode='nearest', featurewise_center=True, featurewise_std_normalization=True, zca_whitening=False)
+Images were then rescaled and resized.
+Model analysis
+My ConvNet model is made up of 3 Convolution2D layers, with a 2x2 MaxPooling2D layer following each Convolution2D layer.  After the first 2 pooling layers, the number of kernels was doubled to add more depth. 
+Afterwards, the output of the third pooling layer is flattened to 1D (via the Flatten layer), and passed through two fully connected (Dense) layers.  ReLU activation is used for all layers except the output dense layer, which uses a sigmoid activation.
+To regularise the model and further prevent overfitting, a Dropout layer is applied before the final Dense layer. I could try dropout after each pooling to see whether this improves the performance of the model
+Finally, I compiled the model and used the cross-entropy loss function as the objective to optimization and RMSprop for gradient descent. RMSprop gave a better performance than Adam and sgd gradient descent methods.
+Below is a sampler from running the algorithm. The best val_loss was 0.4328 and the best accuracy of the model is 84.82%. This was saved.
+Using Theano backend.
+Found 708 images belonging to 2 classes.
+Found 112 images belonging to 2 classes.
+Epoch 1/50704/708 [============================>.] - ETA: 0s - loss: 0.7812 - acc: 0.5298Epoch 00000: val_loss improved from inf to 0.66015, saving model to /tmp/weights.hdf5708/708 [==============================] - 78s - loss: 0.7803 - acc: 0.5297 - val_loss: 0.6602 - val_acc: 0.7946
+Epoch 2/50704/708 [============================>.] - ETA: 0s - loss: 0.7116 - acc: 0.5582Epoch 00001: val_loss improved from 0.66015 to 0.43285, saving model to /tmp/weights.hdf5708/708 [==============================] - 75s - loss: 0.7114 - acc: 0.5593 - val_loss: 0.4328 - val_acc: 0.8482
+Epoch 3/50704/708 [============================>.] - ETA: 0s - loss: 0.6762 - acc: 0.6023Epoch 00002: val_loss did not improve708/708 [==============================] - 67s - loss: 0.6763 - acc: 0.6017 - val_loss: 0.6267 - val_acc: 0.6607
+
+How to run on a LINUX machine
+Make sure the file is executable: chmod +x script.py
+Use a shebang to let the kernel know what interpreter to use. The top line of the script should read:
+#!/usr/bin/python
+Then type  ./script.py
+if the script is in your current directory, or script.py
+if the location of the script happens to be in your PATH, or path/to/script.py
