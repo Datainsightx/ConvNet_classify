@@ -1,5 +1,4 @@
 from keras.models import model_from_json
-import numpy
 
 # load json and create model
 json_file = open('model.json', 'r')
