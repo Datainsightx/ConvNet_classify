@@ -1,0 +1,9 @@
+How to run on a LINUX machine
+Make  the file executable: chmod +x script.py
+Use a shebang to let the kernel know what interpreter to use. The top line of the script should read:
+#!/usr/bin/python
+Then type  ./script.py
+if the script is in your current directory, or script.py
+if the location of the script happens to be in your PATH, or path/to/script.py
+Contact GitHub API Training Shop Blog About
+© 2017 GitHub, Inc. Terms Privacy Security Status Help
