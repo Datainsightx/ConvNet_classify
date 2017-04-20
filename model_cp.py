@@ -1,6 +1,11 @@
 #CNN deep learning algorithm compiled by Isaac Alabi
 #Adaptation is from the keras documentation
-#================================================================================
+#========================================================================================================
+#I created two directories named train and test.
+#The train directory contains 2 separate folders, one for sushi images and the other for sandwich images.
+#I did the same for the test directory.
+#Both directories are housed in a directory called Data_cp
+#========================================================================================================
 #Import the modules/libraries needed for the ConvNet algorithm
 
 from keras.models import Sequential
